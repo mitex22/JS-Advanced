@@ -27,3 +27,4 @@ function spiralMatrix(...params) {
 }
 
 spiralMatrix(5, 5);
+spiralMatrix(3, 3);
