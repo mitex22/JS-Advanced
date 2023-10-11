@@ -18,16 +18,27 @@ function storeCatalogue(tokens) {
     for (const letter of sortedLetters) {
         console.log(letter);
 
+        // SORT BY KEYS
         const ordered = Object
             .keys(catalogueObj[letter])
             .sort((a, b) => (a.toLowerCase().localeCompare(b.toLowerCase())))
             .reduce(
-            (obj, key) => {
-                obj[key] = catalogueObj[letter][key];
-                return obj;
-            },
-            {}
-        );
+                (obj, key) => {
+                    obj[key] = catalogueObj[letter][key];
+                    return obj;
+                },
+                {}
+            );
+
+        // SORT BY VALUES
+        const orderedByVal = Object
+            .entries(catalogueObj[letter])
+            .sort(([,a],[,b]) => a - b)
+            .reduce(
+                (r, [k, v]) => ({ ...r, [k]: v }), {});
+
+        console.log('ordered by key: ', ordered);
+        console.log('ordered by val: ', orderedByVal);
 
         for (const prod in ordered) {
             console.log(`  ${prod}: ${ordered[prod]}`);
